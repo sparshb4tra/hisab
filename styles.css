@@ -60,6 +60,15 @@ body {
 }
 html { overflow-x: hidden; }
 
+/* Desktop-wide global scale to emulate 90% browser zoom */
+@media (min-width: 1025px) {
+    body.scale-90 { zoom: 0.9; }
+    /* Firefox fallback: zoom unsupported */
+    @supports not (zoom: 1) {
+        body.scale-90 { transform: scale(0.9); transform-origin: top left; width: 111.111%; }
+    }
+}
+
 /* App Container */
 .app-container {
     display: flex;
