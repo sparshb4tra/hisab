@@ -1,177 +1,440 @@
-## hisab – split expenses without the spreadsheet anxiety<br>
+# hisab – split expenses without the spreadsheet anxiety
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-%238C1007.svg?style=flat-square)](LICENSE)
-<br>
-Hisab (Hindi: "account", "reckoning") is a minimal, mobile-first expense splitter. Create a group, add participants, record expenses, and see exactly who owes whom—no sign‑up, no fluff, just math that balances.
 
-Why "hisab"?
-- It’s a word friends actually say when settling bills. Approachable and human, not SaaS-y.
-- It communicates the product’s intent in one breath: quick accounting; clean reckoning.
+<img width="607" height="244" alt="image" src="https://github.com/user-attachments/assets/65b4625c-5e66-413f-8f75-8a50b0c99db8" />
 
-### Live demo
-- Website: [Click here](https://hi-sab.vercel.app/)
-- Code: [Check it out](https://github.com/sparshb4tra/hisab)
+Hisab (Hindi: "account", "reckoning") is a minimal, mobile-first expense splitter. Create a group, add participants, record expenses, and see exactly who owes whom—no sign-up, no fluff, just math that balances.
 
-### Table of contents
-- Features
-- UX highlights
-- Tech stack
-- Screenshots & gif slots
-- Getting started
-- Usage notes
-- Export formats
-- Data model & persistence
-- Validation & security
-- Roadmap
-- Contributing
-- License
+**Why "hisab"?**
+- It's a word friends actually say when settling bills. Approachable and human, not SaaS-y.
+- It communicates the product's intent in one breath: quick accounting; clean reckoning.
+
+## Live Demo
+- 🌐 **Website**: [hi-sab.netlify.app](https://hi-sab.netlify.app/)
+- 💻 **Source Code**: [GitHub Repository](https://github.com/sparshb4tra/hisab)
+
+## Table of Contents
+- [Features](#features)
+- [UX Highlights](#ux-highlights)
+- [Tech Stack](#tech-stack)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Usage Guide](#usage-guide)
+- [Export Formats](#export-formats)
+- [Data Model & Persistence](#data-model--persistence)
+- [Validation & Security](#validation--security)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
 ## Features
 
-MVP
-- Create groups/events and add participants (with join dates)
-- Add expenses with categories and a payer
-- Split methods: equal, custom amounts, percentages
-- Per‑group currency (USD, EUR, GBP, CAD, INR); currency is locked for the group
-- Realtime balances and who owes whom
-- Record settlements
-- View summary (with perspective selector to see from a specific participant’s POV)
+### Core Features (MVP)
+- **Group Management**: Create groups/events and add participants with join dates
+- **Expense Tracking**: Add expenses with categories and specify who paid
+- **Flexible Splitting**: Equal splits, custom amounts, or percentage-based
+- **Multi-Currency Support**: Per-group currency (USD, EUR, GBP, CAD, INR) - locked for consistency
+- **Real-time Balances**: Instant calculation of who owes whom
+- **Settlement Recording**: Track payments between participants  
+- **Perspective View**: See balances from any participant's point of view
 
-Essential
-- Edit/delete expenses (modal)
-- Export summary: Text (.txt), CSV, PDF (jsPDF), with consistent styling
-- Sidebar groups card with quick actions (Add Expense, View Summary, Export)
-- Input validation: numbers only, field-level errors
-- Data persistence via localStorage
+### Essential Features
+- **Expense Management**: Edit/delete expenses with intuitive modals
+- **Export Options**: Text (.txt), CSV, and PDF formats with consistent styling
+- **Quick Actions**: Sidebar group cards with Add Expense, View Summary, and Export
+- **Input Validation**: Number-only fields with real-time error feedback
+- **Data Persistence**: Automatic saving via localStorage
 
-Nice‑to‑have (implemented tastefully)
-- Per‑participant join dates (reflected in group cards)
-- Consolidated Export button with overlay (also in sidebar cards)
-- Mobile-first off‑canvas sidebar with hamburger; sticky translucent top bar
-- Custom icon set + favicon; GitHub link (micro-interactions)
-- Perspective view that rewrites balances relative to the selected user
-- Minimal, production‑lean palette; Helvetica for text, Courier New for numbers
-
-Removed by design
-- All charts/graphs (requested to be removed)—kept the summary simple and legible
+### Enhanced UX Features
+- **Mobile-First Design**: Off-canvas sidebar with hamburger menu and sticky top bar
+- **Join Date Tracking**: Per-participant join dates reflected in group cards
+- **Export Overlay**: Single Export button with clear format options
+- **Custom Iconography**: Custom icon set with favicon and micro-interactions
+- **Clean Typography**: Helvetica for text, Courier New for numbers
+- **Minimal Design**: Production-lean color palette focused on usability
 
 ---
 
-## UX highlights
+## UX Highlights
 
-- Mobile‑first navigation: hamburger menu takes over until a group is selected; sticky topbar when working inside a group
-- Export overlay: one Export button, three clear options (TXT, CSV, PDF)
-- Perspective selector: "Show me my hisab"—balances rewrite from a specific participant’s perspective
-- Non‑selectable "hisab" titles act like logos; clean, glassy hover for the GitHub link
-- Consistent currency per group, visually locked in the expense form
-
----
-
-## Tech stack
-
-- HTML5, CSS3 (responsive, grid/flex, glassy micro‑interactions)
-- Vanilla JavaScript (ES6+), class‑based app logic (`ExpenseSplitter`)
-- jsPDF for PDF export
-- localStorage for persistence
-- No frameworks, zero build requirements
+- **Mobile-First Navigation**: Hamburger menu transitions seamlessly until group selection; sticky header for in-group navigation
+- **Unified Export Experience**: One Export button reveals three clear format options (TXT, CSV, PDF)
+- **Perspective Selector**: "Show me my hisab" - dynamically rewrites all balances from selected participant's viewpoint
+- **Brand Consistency**: Non-selectable "hisab" titles serve as logo elements; elegant hover effects for external links
+- **Currency Consistency**: Visually locked currency selection per group in expense forms
 
 ---
 
-## Screenshots & GIFs
+## Tech Stack
 
-Drop your media into `public/` and reference here. Suggested flow:
-- 01_home.png — empty state (mobile + desktop)
-- 02_create_group.png — creating a group + currency
-- 03_add_participants.png — participant dates + list
-- 04_add_expense.png — expense form
-- 05_summary.png — summary cards and perspective selector
-- 06_export_overlay.gif — export overlay interaction
-- 07_sidebar_cards.png — group cards with actions
+- **Frontend**: HTML5, CSS3 (responsive grid/flexbox, glassy micro-interactions)
+- **JavaScript**: Vanilla ES6+ with class-based architecture (`ExpenseSplitter`)
+- **PDF Generation**: jsPDF library for formatted exports
+- **Data Storage**: localStorage for client-side persistence
+- **Dependencies**: Zero frameworks, no build process required
 
-```text
-![hisab overview](public/01_home.png)
-![Create group](public/02_create_group.png)
-![Add participants](public/03_add_participants.png)
-![Add expense](public/04_add_expense.png)
-![Summary & Analytics](public/05_summary.png)
-![Export overlay](public/06_export_overlay.gif)
-![Sidebar cards](public/07_sidebar_cards.png)
+---
+
+## Screenshots
+
+### Responsive Design Showcase
+Hisab is built with a **mobile-first, fully responsive design** that adapts seamlessly across all screen sizes.
+
+#### Screenshot Organization:
+```
+public/
+├── desktop/
+│   ├── 01_desktop.png
+│   ├── 02_desktop.png
+│   ├── 03_desktop.png
+│   ├── 04_desktop.png
+│   ├── 05_desktop.png
+│   └── 07_desktop.png
+├── mobile/
+│   ├── 01_mobile.png
+│   ├── 02_mobile.png
+│   ├── 03_mobile.png
+│   ├── 04_mobile.png
+│   ├── 05_mobile.png
+│   ├── 06_mobile.png
+│   └── 07_mobile.png
 ```
 
+### Desktop Experience
+<div align="center">
+
+| [![Desktop Home](public/desktop/01_desktop.png)](public/desktop/01_desktop.png) | [![Desktop Create Group](public/desktop/02_desktop.png)](public/desktop/02_desktop.png) |
+|:---:|:---:|
+| *Clean, spacious layout with full sidebar navigation* | *Intuitive group creation with currency selection* |
+| [![Desktop Summary](public/desktop/05_desktop.png)](public/desktop/05_desktop.png) | [![Desktop Add Expense](public/desktop/03_desktop.png)](public/desktop/03_desktop.png) |
+| *Comprehensive balance overview with perspective selector* | *Streamlined expense input with split options* |
+
+*Click any image to view full size*
+
+</div>
+
+### Mobile Experience
+<div align="center">
+
+| [![Mobile Home](public/mobile/01_mobile.png)](public/mobile/01_mobile.png) | [![Mobile Menu](public/mobile/06_mobile.png)](public/mobile/06_mobile.png) |
+|:---:|:---:|
+| *Mobile-first design with hamburger navigation* | *Off-canvas sidebar with smooth animations* |
+
+| [![Mobile Expense Form](public/mobile/04_mobile.png)](public/mobile/04_mobile.png) | [![Mobile Summary](public/mobile/02_mobile.png)](public/mobile/02_mobile.png) |
+|:---:|:---:|
+| *Touch-optimized forms with clear visual hierarchy* | *Mobile-friendly balance cards and actions* |
+
+*Click any image to view full size*
+
+</div>
+
 ---
 
-## Getting started
+## Getting Started
 
-Option A — just open it
-- Clone the repo and open `index.html` in your browser
-
-Option B — serve locally (recommended for CORS‑safe PDF/fonts)
+### Option A: Direct Usage
+Clone the repository and open `index.html` directly in your browser:
 ```bash
-# any static server works; examples:
-npx serve .
-# or
-python -m http.server 5173
+git clone https://github.com/sparshb4tra/hisab.git
+cd hisab
+# Open index.html in your browser
 ```
-Then visit http://localhost:5173 (or whichever port).
+
+### Option B: Local Server (Recommended)
+For optimal experience with PDF exports and font loading:
+```bash
+# Using npx serve
+npx serve .
+
+# Or using Python
+python -m http.server 5173
+
+# Or any static file server of your choice
+```
+Then visit `http://localhost:5173` (or your chosen port).
 
 ---
 
-## Usage notes
+## Usage Guide
 
-- Create a group and pick a currency (locked thereafter for consistency)
-- Add participants (their join date is captured)
-- Add expenses:
-  - Split equally, by custom amounts, or by percentages
-  - "Who paid?" must be one of the participants
-- Use Settlements to record transfers between people
-- Summary → choose a participant to view from their perspective ("my hisab")
-- Export from the main Summary or from any group card
-
----
-
-## Export formats
-
-- Text (.txt): human‑readable summary
-- CSV: machine‑friendly with columns for direction ("Owed"/"Owes")
-- PDF: formatted overview (jsPDF), includes participants, expenses, balances, totals
+1. **Create a Group**: Start by creating a group and selecting a currency (locked for consistency)
+2. **Add Participants**: Add group members - their join dates are automatically captured
+3. **Record Expenses**: 
+   - Choose splitting method: equal, custom amounts, or percentages
+   - Select "Who paid?" from group participants
+   - Add categories for better organization
+4. **Track Settlements**: Record actual payments between participants
+5. **View Summary**: 
+   - See overall group balances
+   - Switch perspective to any participant's view ("my hisab")
+6. **Export Data**: Generate reports in Text, CSV, or PDF format from Summary or group cards
 
 ---
 
-## Data model & persistence
+## Export Formats
 
-- Data is stored in `localStorage`:
-  - Groups with participants, expenses, and currency
-  - Settlements keyed by `currentGroupId`
-- Backward compatibility helper (`migrateParticipants`) ensures older string‑only participants are normalized
+| Format | Description | Use Case |
+|--------|-------------|----------|
+| **Text (.txt)** | Human-readable summary with clear formatting | Quick sharing via messaging apps |
+| **CSV** | Machine-friendly data with direction columns ("Owed"/"Owes") | Spreadsheet import, data analysis |
+| **PDF** | Professionally formatted report with participants, expenses, and totals | Formal record-keeping, printing |
 
 ---
 
-## Validation & security
+## Data Model & Persistence
 
-- Amount fields accept numbers only; invalid entry prompts a red error
-- User‑rendered strings are sanitized to avoid HTML injection
-- Money math is done in integer cents internally; equal/percentage splits reconcile remainders fairly
+- **Storage**: All data persists in browser's `localStorage`
+- **Structure**: Groups contain participants, expenses, and currency settings
+- **Settlements**: Keyed by `currentGroupId` for efficient retrieval  
+- **Backward Compatibility**: Automatic migration helper (`migrateParticipants`) ensures older data formats remain functional
+
+---
+
+## Validation & Security
+
+- **Input Validation**: Amount fields enforce numeric input with real-time error feedback
+- **XSS Prevention**: All user-rendered strings are sanitized to prevent HTML injection
+- **Precision Handling**: Money calculations performed in integer cents to avoid floating-point errors
+- **Fair Distribution**: Equal/percentage splits use remainder reconciliation for accurate totals
 
 ---
 
 ## Roadmap
 
-- Optional backend (auth + DB) for multi‑device sync
-- Invite links and role permissions
-- Multi‑currency conversion rules (fx source + lock date)
-- Import/export full app state (JSON)
-- Test suite: unit tests for splits and balances; e2e flows
+### Near Term
+- [ ] Optional backend integration (authentication + database) for multi-device sync
+- [ ] Invite links with role-based permissions
+- [ ] Full app state import/export (JSON format)
+
+### Future Enhancements  
+- [ ] Multi-currency conversion with exchange rate locking
+- [ ] Comprehensive test suite (unit tests for split logic, e2e user flows)
+- [ ] Advanced expense categorization and filtering
+- [ ] Receipt photo attachments
 
 ---
 
 ## Contributing
 
-Issues and PRs are welcome. Keep the design minimal, the logic readable, and the UX un‑blocky.
+We welcome issues and pull requests! When contributing:
+
+- **Design Philosophy**: Maintain minimal, clean design principles
+- **Code Quality**: Keep logic readable and well-documented
+- **User Experience**: Ensure changes don't introduce friction or complexity
+
+Please open an issue before starting major feature work to discuss the approach.
 
 ---
 
 ## License
 
-MIT © sparshb4tra — see `LICENSE` for details.
+MIT © [sparshb4tra](https://github.com/sparshb4tra) — see [LICENSE](LICENSE) for details.
 
+---
+
+<div align="center">
+  <sub>Built with ❤️ for splitting bills without the spreadsheet headaches</sub>
+</div>
+
+---
+
+
+
+
+# hisab – split expenses without the spreadsheet anxiety
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-%238C1007.svg?style=flat-square)](LICENSE)
+
+Hisab (Hindi: "account", "reckoning") is a minimal, mobile-first expense splitter. Create a group, add participants, record expenses, and see exactly who owes whom—no sign-up, no fluff, just math that balances.
+
+**Why "hisab"?**
+- It's a word friends actually say when settling bills. Approachable and human, not SaaS-y.
+- It communicates the product's intent in one breath: quick accounting; clean reckoning.
+
+## Live Demo
+- 🌐 **Website**: [hi-sab.netlify.app](https://hi-sab.netlify.app/)
+- 💻 **Source Code**: [GitHub Repository](https://github.com/sparshb4tra/hisab)
+
+## Table of Contents
+- [Features](#features)
+- [UX Highlights](#ux-highlights)
+- [Tech Stack](#tech-stack)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Usage Guide](#usage-guide)
+- [Export Formats](#export-formats)
+- [Data Model & Persistence](#data-model--persistence)
+- [Validation & Security](#validation--security)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Features
+
+### Core Features (MVP)
+- **Group Management**: Create groups/events and add participants with join dates
+- **Expense Tracking**: Add expenses with categories and specify who paid
+- **Flexible Splitting**: Equal splits, custom amounts, or percentage-based
+- **Multi-Currency Support**: Per-group currency (USD, EUR, GBP, CAD, INR) - locked for consistency
+- **Real-time Balances**: Instant calculation of who owes whom
+- **Settlement Recording**: Track payments between participants  
+- **Perspective View**: See balances from any participant's point of view
+
+### Essential Features
+- **Expense Management**: Edit/delete expenses with intuitive modals
+- **Export Options**: Text (.txt), CSV, and PDF formats with consistent styling
+- **Quick Actions**: Sidebar group cards with Add Expense, View Summary, and Export
+- **Input Validation**: Number-only fields with real-time error feedback
+- **Data Persistence**: Automatic saving via localStorage
+
+### Enhanced UX Features
+- **Mobile-First Design**: Off-canvas sidebar with hamburger menu and sticky top bar
+- **Fully Responsive**: Seamless experience across desktop, tablet, and mobile devices
+- **Join Date Tracking**: Per-participant join dates reflected in group cards
+- **Export Overlay**: Single Export button with clear format options
+- **Custom Iconography**: Custom icon set with favicon and micro-interactions
+- **Clean Typography**: Helvetica for text, Courier New for numbers
+- **Minimal Design**: Production-lean color palette focused on usability
+
+---
+
+## UX Highlights
+
+- **Mobile-First Navigation**: Hamburger menu transitions seamlessly until group selection; sticky header for in-group navigation
+- **Unified Export Experience**: One Export button reveals three clear format options (TXT, CSV, PDF)
+- **Perspective Selector**: "Show me my hisab" - dynamically rewrites all balances from selected participant's viewpoint
+- **Brand Consistency**: Non-selectable "hisab" titles serve as logo elements; elegant hover effects for external links
+- **Currency Consistency**: Visually locked currency selection per group in expense forms
+
+---
+
+## Tech Stack
+
+- **Frontend**: HTML5, CSS3 (responsive grid/flexbox with mobile-first approach, glassy micro-interactions)
+- **JavaScript**: Vanilla ES6+ with class-based architecture (`ExpenseSplitter`)
+- **Responsive Design**: CSS Grid and Flexbox for seamless adaptation across all screen sizes
+- **PDF Generation**: jsPDF library for formatted exports
+- **Data Storage**: localStorage for client-side persistence
+- **Dependencies**: Zero frameworks, no build process required
+
+---
+
+## Screenshots
+
+> **Note**: Add your screenshots to the `public/` directory and update the paths below.
+
+### Responsive Design Showcase
+Hisab is built with a **mobile-first, fully responsive design** that adapts seamlessly across all screen sizes.
+
+#### Screenshot Organization:
+```
+public/
+├── desktop/
+│   ├── 01_home_desktop.png
+│   ├── 02_create_group_desktop.png
+│   ├── 03_add_participants_desktop.png
+│   ├── 04_add_expense_desktop.png
+│   ├── 05_summary_desktop.png
+│   └── 07_sidebar_cards_desktop.png
+├── mobile/
+│   ├── 01_home_mobile.png
+│   ├── 02_create_group_mobile.png
+│   ├── 03_add_participants_mobile.png
+│   ├── 04_add_expense_mobile.png
+│   ├── 05_summary_mobile.png
+│   ├── 06_hamburger_menu_mobile.png
+│   └── 07_sidebar_cards_mobile.png
+└── interactions/
+    └── 06_export_overlay.gif
+```
+
+
+
+> **Troubleshooting**: If images aren't displaying, verify your file paths match the structure above and that files are committed to your repository.
+
+---
+
+## Getting Started
+
+### Option A: Direct Usage
+Clone the repository and open `index.html` directly in your browser:
+```bash
+git clone https://github.com/sparshb4tra/hisab.git
+cd hisab
+# Open index.html in your browser
+```
+
+### Option B: Local Server (Recommended)
+For optimal experience with PDF exports and font loading:
+```bash
+# Using npx serve
+npx serve .
+
+# Or using Python
+python -m http.server 5173
+
+# Or any static file server of your choice
+```
+Then visit `http://localhost:5173` (or your chosen port).
+
+---
+
+## Usage Guide
+
+1. **Create a Group**: Start by creating a group and selecting a currency (locked for consistency)
+2. **Add Participants**: Add group members - their join dates are automatically captured
+3. **Record Expenses**: 
+   - Choose splitting method: equal, custom amounts, or percentages
+   - Select "Who paid?" from group participants
+   - Add categories for better organization
+4. **Track Settlements**: Record actual payments between participants
+5. **View Summary**: 
+   - See overall group balances
+   - Switch perspective to any participant's view ("my hisab")
+6. **Export Data**: Generate reports in Text, CSV, or PDF format from Summary or group cards
+
+---
+
+## Export Formats
+
+| Format | Description | Use Case |
+|--------|-------------|----------|
+| **Text (.txt)** | Human-readable summary with clear formatting | Quick sharing via messaging apps |
+| **CSV** | Machine-friendly data with direction columns ("Owed"/"Owes") | Spreadsheet import, data analysis |
+| **PDF** | Professionally formatted report with participants, expenses, and totals | Formal record-keeping, printing |
+
+---
+
+## Data Model & Persistence
+
+- **Storage**: All data persists in browser's `localStorage`
+- **Structure**: Groups contain participants, expenses, and currency settings
+- **Settlements**: Keyed by `currentGroupId` for efficient retrieval  
+- **Backward Compatibility**: Automatic migration helper (`migrateParticipants`) ensures older data formats remain functional
+
+---
+
+## Validation & Security
+
+- **Input Validation**: Amount fields enforce numeric input with real-time error feedback
+- **XSS Prevention**: All user-rendered strings are sanitized to prevent HTML injection
+- **Precision Handling**: Money calculations performed in integer cents to avoid floating-point errors
+- **Fair Distribution**: Equal/percentage splits use remainder reconciliation for accurate totals
+
+---
+
+## Roadmap
+
+### Near Term
+- [ ] Optional backend integration (authentication + database) for multi-device sync
+- [ ] Invite links with role-based permissions
+- [ ] Full app state import/export (JSON format)
+
+<div align="center">
+  <sub>Built with ❤️ for splitting bills without the spreadsheet headaches</sub>
+</div>
