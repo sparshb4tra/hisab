@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hisab</title>
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+        <!-- Mobile Topbar (mobile only via CSS) -->
+        <div class="mobile-topbar">
+            <button id="hamburgerBtn" class="hamburger" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="topbar-title logo-title"><img src="public/calculator-icon.png" alt="Calculator" class="logo-icon"> hisab</div>
+            <a class="topbar-gh" href="https://github.com/sparshb4tra" target="_blank" rel="noopener" aria-label="Open GitHub profile">
+                <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M12 .5a12 12 0 00-3.79 23.39c.6.11.82-.26.82-.58v-2.2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.82 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.66-.31-5.46-1.33-5.46-5.9 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.55.12-3.24 0 0 1-.32 3.3 1.22a11.45 11.45 0 016 0c2.3-1.54 3.3-1.22 3.3-1.22.65 1.69.24 2.94.12 3.24.77.83 1.23 1.89 1.23 3.19 0 4.58-2.8 5.58-5.47 5.89.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.58A12 12 0 0012 .5z"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Desktop GitHub (hidden on mobile via CSS) -->
+        <div class="github-profile">
+            <a class="gh-link" href="https://github.com/sparshb4tra" target="_blank" rel="noopener">
+                <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M12 .5a12 12 0 00-3.79 23.39c.6.11.82-.26.82-.58v-2.2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.82 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.66-.31-5.46-1.33-5.46-5.9 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.55.12-3.24 0 0 1-.32 3.3 1.22a11.45 11.45 0 016 0c2.3-1.54 3.3-1.22 3.3-1.22.65 1.69.24 2.94.12 3.24.77.83 1.23 1.89 1.23 3.19 0 4.58-2.8 5.58-5.47 5.89.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.58A12 12 0 0012 .5z"/>
+                </svg>
+                <span>@sparshb4tra</span>
+            </a>
+        </div>
+
+        <div class="app-container">
+        <!-- Fixed Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button id="closeSidebarBtn" class="sidebar-close" aria-label="Close menu">✕</button>
+            <div class="sidebar-header">
+                <h2 class="logo-title"><img src="public/calculator-icon.png" alt="Calculator" class="icon"> hisab</h2>
+            </div>
+            
+            <!-- Group Creation Section -->
+            <div class="group-creation">
+                <h3>Create New Group</h3>
+                <div class="group-input-section">
+                    <input type="text" id="groupName" placeholder="Enter group name (e.g., Vegas Trip)">
+                    <button id="createGroup" class="btn btn-primary">Create Group</button>
+                </div>
+            </div>
+            
+            <!-- Groups List -->
+            <div class="groups-list-section" id="groupsListSection" style="display: none;">
+                <h3>Your Groups</h3>
+                <div class="groups-list" id="groupsList"></div>
+            </div>
+        </aside>
+        <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header>
+                <h1 id="mainTitle">hisab karlo asap</h1>
+                <p id="mainSubtitle">Create a group to get started</p>
+            </header>
+            <!-- Mobile CTA when no group selected -->
+            <div id="mobileCta" class="mobile-cta" style="display: none;">
+                <p>No group selected</p>
+                <button id="mobileCreateGroup" class="btn btn-primary">Create Group</button>
+            </div>
+
+            <!-- Group Management Section -->
+            <section class="group-section" id="groupSection" style="display: none;">
+                <div class="group-header">
+                    <h2><img src="public/users-icon.png" alt="Users" class="icon"> <span id="groupNameDisplay"></span></h2>
+                    <div class="group-actions">
+                        <button id="editGroupName" class="btn btn-secondary">
+                            <img src="public/edit-icon.png" alt="Edit" class="icon"> Edit Name
+                        </button>
+                        <button id="deleteGroup" class="btn btn-danger">
+                            <img src="public/trash-icon.png" alt="Delete" class="icon"> Delete Group
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="participants-section">
+                    <h3>Participants</h3>
+                    <div class="participant-inputs">
+                        <input type="text" id="participantName" placeholder="Enter participant name">
+                        <input type="date" id="participantJoinDate" value="">
+                        <button id="openDatePicker" class="calendar-btn" aria-label="Pick date">📅</button>
+                        <button id="addParticipant" class="btn btn-secondary">Add Participant</button>
+                    </div>
+                    <div class="participants-list" id="participantsList"></div>
+                </div>
+            </section>
+
+            <!-- Expense Management Section -->
+            <section class="expense-section" id="expenseSection" style="display: none;">
+                <h2><img src="public/receipt-icon.png" alt="Receipt" class="icon"> Add Expenses</h2>
+                <div class="expense-form">
+                    <div class="form-row">
+                        <input type="text" id="expenseDescription" placeholder="What was the expense for?">
+                        <select id="expenseCategory">
+                            <option value="food">🍕 Food</option>
+                            <option value="transportation">🚗 Transportation</option>
+                            <option value="accommodation">🏨 Accommodation</option>
+                            <option value="entertainment">🎮 Entertainment</option>
+                            <option value="utilities">⚡ Utilities</option>
+                            <option value="other">📦 Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="expenseAmount" placeholder="Amount" step="0.01" min="0">
+                        <select id="expenseCurrency">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="CAD">CAD (C$)</option>
+                            <option value="INR">INR (₹)</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <select id="expensePayer">
+                            <option value="">Who paid?</option>
+                        </select>
+                        <select id="splitMethod">
+                            <option value="equal">Equal Split</option>
+                            <option value="custom">Custom Amounts</option>
+                            <option value="percentage">Percentage Split</option>
+                        </select>
+                    </div>
+                    <div class="split-options" id="splitOptions" style="display: none;">
+                        <div id="equalSplit" class="split-option">
+                            <p>Split equally among all participants</p>
+                        </div>
+                        <div id="customSplit" class="split-option" style="display: none;">
+                            <h4>Custom Amounts</h4>
+                            <div id="customSplitInputs"></div>
+                        </div>
+                        <div id="percentageSplit" class="split-option" style="display: none;">
+                            <h4>Percentage Split</h4>
+                            <div id="percentageSplitInputs"></div>
+                        </div>
+                    </div>
+                    <button id="addExpense" class="btn btn-primary">Add Expense</button>
+                </div>
+            </section>
+
+            <!-- Expenses List Section -->
+            <section class="expenses-list-section" id="expensesListSection" style="display: none;">
+                <h2><img src="public/list-icon.png" alt="List" class="icon"> Expenses</h2>
+                <div class="expenses-list" id="expensesList"></div>
+            </section>
+
+            <!-- Balances Section -->
+            <section class="balances-section" id="balancesSection" style="display: none;">
+                <h2><img src="public/balance-scale-icon.png" alt="Balance Scale" class="icon"> Balances & Settlements</h2>
+                <div class="balances-summary" id="balancesSummary"></div>
+                <div class="settlements-section">
+                    <h3>Record Settlements</h3>
+                    <div class="settlement-form">
+                        <select id="settlementFrom">
+                            <option value="">Who is paying?</option>
+                        </select>
+                        <select id="settlementTo">
+                            <option value="">Who is receiving?</option>
+                        </select>
+                        <input type="number" id="settlementAmount" placeholder="Amount" step="0.01" min="0">
+                        <button id="recordSettlement" class="btn btn-secondary">Record Settlement</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Section -->
+            <section class="summary-section" id="summarySection" style="display: none;">
+                <h2><img src="public/chart-bar-icon.png" alt="Summary" class="icon"> Summary & Analytics</h2>
+                
+                <!-- User Selection for Summary Perspective -->
+                <div class="user-selection-section">
+                    <label for="summaryUserSelect">View summary from perspective of:</label>
+                    <select id="summaryUserSelect" class="user-select">
+                        <option value="">Select a participant</option>
+                    </select>
+                    <small class="help-text">Choose whose perspective to view the balances from</small>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="summary-stats" id="summaryStats"></div>
+                
+                <div class="export-section">
+                    <div class="export-overlay">
+                        <button id="exportSummaryBtn" class="btn btn-primary export-btn">
+                            <img src="public/download-icon.png" alt="Export" class="icon"> Export
+                        </button>
+                        <div class="export-overlay-content" id="exportDropdown">
+                            <div class="export-option" data-format="txt">
+                                Text (.txt)
+                            </div>
+                            <div class="export-option" data-format="csv">
+                                CSV
+                            </div>
+                            <div class="export-option" data-format="pdf">
+                                PDF
+                            </div>
+                        </div>
+                    </div>
+                    <button id="shareSummary" class="btn btn-secondary">
+                        <img src="public/share-icon.png" alt="Share" class="icon"> Share Summary
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Group Name Modal -->
+    <div id="editGroupNameModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Edit Group Name</h3>
+            <div class="edit-group-form">
+                <input type="text" id="editGroupNameInput" placeholder="Enter new group name">
+                <button id="saveGroupName" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Expense Modal -->
+    <div id="editExpenseModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Edit Expense</h3>
+            <div class="edit-expense-form">
+                <input type="text" id="editExpenseDescription" placeholder="Description">
+                <select id="editExpenseCategory">
+                    <option value="food">Food</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="accommodation">Accommodation</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="number" id="editExpenseAmount" placeholder="Amount" step="0.01" min="0">
+                <select id="editExpensePayer">
+                    <option value="">Who paid?</option>
+                </select>
+                <button id="saveExpenseEdit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Footer GitHub link -->
+    <footer class="mobile-footer">
+        <a class="gh-link" href="https://github.com/sparshb4tra" target="_blank" rel="noopener">
+            <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 .5a12 12 0 00-3.79 23.39c.6.11.82-.26.82-.58v-2.2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.82 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.66-.31-5.46-1.33-5.46-5.9 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.55.12-3.24 0 0 1-.32 3.3 1.22a11.45 11.45 0 016 0c2.3-1.54 3.3-1.22 3.3-1.22.65 1.69.24 2.94.12 3.24.77.83 1.23 1.89 1.23 3.19 0 4.58-2.8 5.58-5.47 5.89.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.58A12 12 0 0012 .5z"/>
+            </svg>
+            <span>@sparshb4tra</span>
+        </a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
