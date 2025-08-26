@@ -34,6 +34,10 @@ class ExpenseSplitter {
         this.showWelcomeMessage();
         this.setDefaultParticipantDate();
         this.setupMobileHandlers();
+        // Apply global 90% visual scale on desktop to match user's preferred look
+        if (window.matchMedia('(min-width: 1025px)').matches) {
+            document.body.classList.add('scale-90');
+        }
     }
 
     setDefaultParticipantDate() {
@@ -379,7 +383,7 @@ class ExpenseSplitter {
                     <span class="participant-date">Joined: ${ExpenseSplitter.escapeHtml(formattedDate)}</span>
                 </div>
                 <button class="remove-participant" onclick="expenseSplitter.removeParticipant('${ExpenseSplitter.escapeHtml(participantName)}')">
-                    <img src="public/close-icon.png" alt="Remove" class="icon">
+                    <img src="./public/close-icon.png" alt="Remove" class="icon">
                 </button>
             `;
             participantsList.appendChild(participantCard);
@@ -800,10 +804,10 @@ class ExpenseSplitter {
                 <div class="expense-date">${new Date(expense.date).toLocaleDateString()}</div>
                 <div class="expense-actions">
                     <button class="btn btn-secondary" onclick="expenseSplitter.editExpense('${expense.id}')">
-                        <img src="public/edit-icon.png" alt="Edit" class="icon">
+                        <img src="./public/edit-icon.png" alt="Edit" class="icon">
                     </button>
                     <button class="btn btn-danger" onclick="expenseSplitter.deleteExpense('${expense.id}')">
-                        <img src="public/trash-icon.png" alt="Delete" class="icon">
+                        <img src="./public/trash-icon.png" alt="Delete" class="icon">
                     </button>
                 </div>
             `;
@@ -1630,7 +1634,7 @@ class ExpenseSplitter {
                 <div class="group-card-header">
                     <h3>${group.name}</h3>
                     <button class="btn btn-sm btn-danger delete-group-btn" onclick="event.stopPropagation(); expenseSplitter.deleteGroup('${group.id}')">
-                        <img src="public/trash-icon.png" alt="Delete" class="icon"> Delete
+                        <img src="./public/trash-icon.png" alt="Delete" class="icon"> Delete
                     </button>
                 </div>
                 <div class="group-stats">
@@ -1641,14 +1645,14 @@ class ExpenseSplitter {
                 </div>
                 <div class="group-card-actions">
                     <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); expenseSplitter.addExpenseToGroup('${group.id}')">
-                        <img src="public/receipt-icon.png" alt="Add Expense" class="icon"> Add Expense
+                        <img src="./public/receipt-icon.png" alt="Add Expense" class="icon"> Add Expense
                     </button>
                     <button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); expenseSplitter.viewGroupSummary('${group.id}')">
-                        <img src="public/chart-bar-icon.png" alt="Chart" class="icon"> View Summary
+                        <img src="./public/chart-bar-icon.png" alt="Chart" class="icon"> View Summary
                     </button>
                     <div class="export-overlay">
                         <button class="btn btn-sm btn-secondary export-btn" onclick="event.stopPropagation(); expenseSplitter.toggleGroupExportDropdown('${group.id}', event)">
-                            <img src="public/download-icon.png" alt="Export" class="icon"> Export
+                            <img src="./public/download-icon.png" alt="Export" class="icon"> Export
                         </button>
                         <div class="export-overlay-content group-export-dropdown" id="groupExportDropdown-${group.id}">
                             <div class="export-option" data-format="txt" data-group-id="${group.id}">
