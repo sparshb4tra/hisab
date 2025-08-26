@@ -1,5 +1,6 @@
-## hisab – split expenses without the spreadsheet anxiety
-
+## hisab – split expenses without the spreadsheet anxiety<br>
+[![License: MIT](https://img.shields.io/badge/License-MIT-%238C1007.svg?style=flat-square)](LICENSE)
+<br>
 Hisab (Hindi: "account", "reckoning") is a minimal, mobile-first expense splitter. Create a group, add participants, record expenses, and see exactly who owes whom—no sign‑up, no fluff, just math that balances.
 
 Why "hisab"?
@@ -7,8 +8,8 @@ Why "hisab"?
 - It communicates the product’s intent in one breath: quick accounting; clean reckoning.
 
 ### Live demo
-- App: https://hi-sab.vercel.app/
-- Code: https://github.com/sparshb4tra/hisab
+- Website: [Click here](https://hi-sab.vercel.app/)
+- Code: [Check it out](https://github.com/sparshb4tra/hisab)
 
 ### Table of contents
 - Features
