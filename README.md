@@ -2,7 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-%238C1007.svg?style=flat-square)](LICENSE)
 
+<p align="center">
 <img width="607" height="244" alt="image" src="https://github.com/user-attachments/assets/65b4625c-5e66-413f-8f75-8a50b0c99db8" />
+</p>
 
 Hisab (Hindi: "account", "reckoning") is a minimal, mobile-first expense splitter. Create a group, add participants, record expenses, and see exactly who owes whom—no sign-up, no fluff, just math that balances.
 
