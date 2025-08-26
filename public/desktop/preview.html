@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hisab preview</title>
+    <link rel="icon" type="image/png" href="./public/favicon.png">
+    <style>
+        /* Match app palette */
+        :root {
+            --bg: #F6FCDF;      /* light lime */
+            --fg: #1A1A19;      /* near-black */
+            --olive: #31511E;   /* deep olive */
+        }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: grid;
+            place-items: center;
+        }
+        .wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 32px 40px;
+            border: 1px solid #859F3D;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 6px 22px rgba(49,81,30,0.12);
+        }
+        .logo-icon {
+            width: 84px;
+            height: 84px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 2px rgba(26,26,25,0.2));
+        }
+        .title {
+            font-size: 88px;
+            line-height: 0.9;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--fg);
+            -webkit-user-select: none; user-select: none;
+        }
+        /* optional: safe zone for screenshots */
+        .safe { padding: 24px; }
+    </style>
+    <script>
+        // Apply the same 90% visual scale used on desktop in the app if needed
+        if (window.matchMedia('(min-width: 1025px)').matches) {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.body.style.zoom = '0.9';
+            });
+        }
+    </script>
+    </head>
+<body>
+    <div class="safe">
+        <div class="wrap" aria-label="hisab logo lockup">
+            <img class="logo-icon" src="./public/calculator-icon.png" alt="Calculator icon">
+            <span class="title">hisab</span>
+        </div>
+    </div>
+</body>
+</html>
+
 
